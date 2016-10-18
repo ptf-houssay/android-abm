@@ -7,23 +7,43 @@ import android.hmkcode.com.sqliteapp.sqlite.MySQLiteHelper;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
+public class MainActivity extends Activity implements OnClickListener {
 
-public class MainActivity extends Activity {
-
+    Button btnStartAnotherActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        btnStartAnotherActivity = (Button) findViewById(R.id.btnStartAnotherActivity);
 
-        MySQLiteHelper db = new MySQLiteHelper(this);
+        btnStartAnotherActivity.setOnClickListener(this);
+    }
 
-        /**
-         * CRUD Operations
-         * */
-        // add Books
-        db.addAlumno(new Alumno("Juan Ignacio", 18));
+    @Override
+    public void onClick(View view) {
+
+        Intent inent = new Intent(this, AnotherActivity.class);
+
+        // calling an activity using <intent-filter> action name
+        //  Intent inent = new Intent("com.hmkcode.android.ANOTHER_ACTIVITY");
+
+        startActivity(inent);
+    }
+
+}
+
+/*
+
+ MySQLiteHelper db = new MySQLiteHelper(this);
+
+db.addAlumno(new Alumno("Juan Ignacio", 18));
         db.addAlumno(new Alumno("Pedro", 15));
         db.addAlumno(new Alumno("Maria", 20));
 
@@ -35,8 +55,4 @@ public class MainActivity extends Activity {
 
         // get all books
         db.getAllAlumnos();
-
-
-    }
-
-}
+ */
